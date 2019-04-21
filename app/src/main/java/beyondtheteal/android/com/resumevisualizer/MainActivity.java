@@ -1,12 +1,9 @@
 package beyondtheteal.android.com.resumevisualizer;
 
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
-import android.text.Layout;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,6 +16,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import beyondtheteal.android.com.resumevisualizer.beyondtheteal.android.com.resumevisualizer.utils.Markdown;
+import beyondtheteal.android.com.resumevisualizer.beyondtheteal.android.com.resumevisualizer.utils.Utils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,18 +52,23 @@ public class MainActivity extends AppCompatActivity
 
         // Add Card View(s)
         LinearLayout mainContent = findViewById(R.id.content_main);
-        for (int i=1; i <= 10; i++) {
-            addCardView(mainContent);
-        }
+        String cardText = Utils.getMarkdownFile(getApplicationContext(), "resume");
+
+//        for (int i=1; i <= 10; i++) {
+            addCardView(mainContent, cardText);
+//        }
     }
 
-    void addCardView(ViewGroup parent) {
+    void addCardView(ViewGroup parent, String cardText) {
         CardView card = (CardView) (getLayoutInflater().inflate(R.layout.collapsed_card, null));
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(10, 10, 10, 10);
         card.setLayoutParams(params);
+
+        TextView tvCardContent = (TextView) card.findViewById(R.id.tvCardContent);
+        Markdown.applyMarkdown(getApplicationContext(), tvCardContent, cardText);
 
         parent.addView(card);
     }

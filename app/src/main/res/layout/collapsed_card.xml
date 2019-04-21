@@ -12,15 +12,12 @@
     android:layout_margin="10dp">
 
     <TextView
-        android:id="@+id/cardContent"
+        android:id="@+id/tvCardContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:inputType="textMultiLine|textImeMultiLine"
-        android:text="Heads up Display app 			 June 2015 - Present
-Allows a driver or engineer to watch parameter values on a heads-up-display connected to a data logger. Communicates using either USB or wifi to the server app which I also maintain.
-"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         card_view:layout_constraintStart_toStartOf="parent"
         card_view:layout_constraintTop_toTopOf="parent" />
